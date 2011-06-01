@@ -1,0 +1,6 @@
+C:\Users\Brian\Projects\GraphicsDemos\GraphicsDemos\GraphicsDemos\bin\x86\Debug\GraphicsDemos.exe
+C:\Users\Brian\Projects\GraphicsDemos\GraphicsDemos\GraphicsDemos\bin\x86\Debug\GraphicsDemos.pdb
+C:\Users\Brian\Projects\GraphicsDemos\GraphicsDemos\GraphicsDemos\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Brian\Projects\GraphicsDemos\GraphicsDemos\GraphicsDemos\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Brian\Projects\GraphicsDemos\GraphicsDemos\GraphicsDemos\obj\x86\Debug\GraphicsDemos.exe
+C:\Users\Brian\Projects\GraphicsDemos\GraphicsDemos\GraphicsDemos\obj\x86\Debug\GraphicsDemos.pdb
