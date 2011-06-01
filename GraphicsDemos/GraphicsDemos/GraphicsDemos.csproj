@@ -109,7 +109,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="GraphicsDemo.cs" />
+    <Compile Include="GraphicsDemos.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

@@ -11,15 +11,17 @@ using Microsoft.Xna.Framework.Media;
 
 namespace GraphicsDemos
 {
-    public class GraphicsDemo : Microsoft.Xna.Framework.Game
+    public class GraphicsDemos : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        public GraphicsDemo()
+        public GraphicsDemos()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            this.IsMouseVisible = true;
 
             //Put our resolution at 720p
             graphics.PreferredBackBufferWidth = 1280;

@@ -10,7 +10,7 @@ namespace GraphicsDemos
         /// </summary>
         static void Main(string[] args)
         {
-            using (GraphicsDemo game = new GraphicsDemo())
+            using (GraphicsDemos game = new GraphicsDemos())
             {
                 game.Run();
             }
