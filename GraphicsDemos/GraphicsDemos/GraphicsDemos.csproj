@@ -107,6 +107,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cameras\Camera.cs" />
+    <Compile Include="Config.cs" />
+    <Compile Include="Demos\Demo.cs" />
+    <Compile Include="Graphics\GraphicsObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="GraphicsDemos.cs" />

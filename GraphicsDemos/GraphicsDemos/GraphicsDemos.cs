@@ -24,8 +24,8 @@ namespace GraphicsDemos
             this.IsMouseVisible = true;
 
             //Put our resolution at 720p
-            graphics.PreferredBackBufferWidth = 1280;
-            graphics.PreferredBackBufferHeight = 720;
+            graphics.PreferredBackBufferWidth = Config.ScreenWidth;
+            graphics.PreferredBackBufferHeight = Config.ScreenHeight;
         }
 
         /// <summary>
