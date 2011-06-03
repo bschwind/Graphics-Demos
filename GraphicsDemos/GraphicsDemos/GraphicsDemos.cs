@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using GraphicsDemos.Demos;
 
 namespace GraphicsDemos
 {
@@ -15,13 +16,13 @@ namespace GraphicsDemos
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        List<Demo> demos;
+        int currentDemo = 0;
 
         public GraphicsDemos()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-
-            this.IsMouseVisible = true;
 
             //Put our resolution at 720p
             graphics.PreferredBackBufferWidth = Config.ScreenWidth;
@@ -47,6 +48,10 @@ namespace GraphicsDemos
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            demos = new List<Demo>();
+            demos.Add(new VectorsDemo());
+            demos[currentDemo].LoadContent(Content, GraphicsDevice);
         }
 
         /// <summary>
@@ -55,7 +60,19 @@ namespace GraphicsDemos
         /// </summary>
         protected override void UnloadContent()
         {
-            
+            demos[currentDemo].UnloadContent();
+        }
+
+        private void ChangeDemo(int demo)
+        {
+            if (demo < 0 || demo >= demos.Count)
+            {
+                return;
+            }
+
+            demos[currentDemo].UnloadContent();
+            currentDemo = demo;
+            demos[currentDemo].LoadContent(Content, GraphicsDevice);
         }
 
         /// <summary>
@@ -66,9 +83,11 @@ namespace GraphicsDemos
         protected override void Update(GameTime gameTime)
         {
             // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
+                || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
 
+            demos[currentDemo].Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -79,7 +98,7 @@ namespace GraphicsDemos
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            demos[currentDemo].Draw(gameTime);
 
             base.Draw(gameTime);
         }
