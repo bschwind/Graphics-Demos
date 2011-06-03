@@ -8,10 +8,14 @@ using GraphicsDemos.Graphics;
 
 namespace GraphicsDemos.Cameras
 {
+    // Defines a common class for special cameras to derive from
+    // Default viewing position is at 0,0,0, facing down the negative Z axis
     public class Camera : IGraphicsObject
     {
         protected Matrix world, view, projection;
-        protected Vector3 pos, target;
+        protected Vector3 pos, dir, up;
+        protected static Vector3 startUp = Vector3.Up;
+        protected static Vector3 startDir = new Vector3(0, 0, -1);
         private float nearPlane, farPlane;
 
         public Matrix World
@@ -46,11 +50,19 @@ namespace GraphicsDemos.Cameras
             }
         }
 
-        public Vector3 Target
+        public Vector3 ViewDir
         {
             get
             {
-                return pos;
+                return dir;
+            }
+        }
+
+        public Vector3 Up
+        {
+            get
+            {
+                return up;
             }
         }
 
@@ -78,22 +90,23 @@ namespace GraphicsDemos.Cameras
             }
         }
 
-        public Camera() : this(Vector3.Zero, new Vector3(0,0,-1f), 45)
+        public Camera() : this(Vector3.Zero, 45f)
         {
 
         }
 
-        public Camera(Vector3 pos, Vector3 target, float fieldOfView)
+        public Camera(Vector3 pos, float fieldOfView)
         {
             this.pos = pos;
-            this.target = target;
-            this.nearPlane = 0.1f;
+            this.dir = startDir;
+            this.up = startUp;
+            this.nearPlane = 0.01f;
             this.farPlane = 1000f;
 
             float aspectRatio = (float)Config.ScreenWidth / Config.ScreenHeight;
 
             world = Matrix.CreateTranslation(pos);
-            view = Matrix.CreateLookAt(pos, target, Vector3.Up);
+            view = Matrix.CreateLookAt(pos, pos+dir, up);
             projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(fieldOfView), aspectRatio, nearPlane, farPlane);
         }
 
