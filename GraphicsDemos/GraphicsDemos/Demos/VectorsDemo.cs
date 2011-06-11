@@ -11,15 +11,29 @@ namespace GraphicsDemos.Demos
 {
     public class VectorsDemo : Demo
     {
-        private UprightFirstPersonCamera cam;
+        private FirstPersonCamera cam;
         private PrimitiveBatch primBatch;
+        //Vectors for our triangle
+        private Vector3 a, b, c, n, triangleCenter;
 
-        public override void LoadContent(ContentManager c, GraphicsDevice g)
+        public override void LoadContent(ContentManager content, GraphicsDevice g)
         {
-            base.LoadContent(c, g);
+            base.LoadContent(content, g);
 
-            cam = new UprightFirstPersonCamera(0.5f, 5f);
+            //Set up our camera and primitive renderer
+            cam = new FirstPersonCamera(0.5f, 5f);
+            cam.Pos = new Vector3(5, 1, 10);
             primBatch = new PrimitiveBatch(g);
+
+
+            //Set up our triangle
+            a = new Vector3(4, 1, 5);
+            b = new Vector3(6, 1.5f, 3);
+            c = new Vector3(6, 1, 5);
+
+            triangleCenter = (a + b + c) / 3f;
+
+            n = Vector3.Normalize(Vector3.Cross(c - a, b - a));
         }
 
         public override void Update(GameTime g)
@@ -32,6 +46,11 @@ namespace GraphicsDemos.Demos
             Device.Clear(Color.Black);
             primBatch.Begin(PrimitiveType.LineList, cam);
             primBatch.DrawXZGrid(10, 10, Color.LightBlue);
+
+            //Draw the triangle and its normal
+            primBatch.DrawTriangle(a, b, c, Color.Blue);
+            primBatch.DrawLine(triangleCenter, triangleCenter + n, Color.Orange);
+
             primBatch.End();
         }
     }

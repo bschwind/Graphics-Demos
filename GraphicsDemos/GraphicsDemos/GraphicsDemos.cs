@@ -85,8 +85,11 @@ namespace GraphicsDemos
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
                 || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            {
                 this.Exit();
+            }
 
+            //Update our current demo
             demos[currentDemo].Update(gameTime);
 
             base.Update(gameTime);
@@ -98,6 +101,7 @@ namespace GraphicsDemos
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
+            //Draw our current demo
             demos[currentDemo].Draw(gameTime);
 
             base.Draw(gameTime);
