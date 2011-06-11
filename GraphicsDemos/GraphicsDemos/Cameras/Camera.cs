@@ -48,6 +48,10 @@ namespace GraphicsDemos.Cameras
             {
                 return pos;
             }
+            set
+            {
+                pos = value;
+            }
         }
 
         public Vector3 ViewDir
