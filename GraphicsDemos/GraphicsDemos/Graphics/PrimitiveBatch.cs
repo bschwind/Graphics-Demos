@@ -139,19 +139,14 @@ namespace GraphicsDemos
         /// <param name="color">The color of the grid</param>
         public void DrawXZGrid(int width, int depth, Color color)
         {
-            for (int x = 0; x < width; x++)
+            for (int x = 0; x <= width; x++)
             {
-                for (int z = 0; z < depth; z++)
-                {
-                    DrawLine(new Vector3(x, 0, z), new Vector3(x, 0, z+1), color);
-                    DrawLine(new Vector3(x + 1, 0, z), new Vector3(x, 0, z), color);
-                }
+                DrawLine(new Vector3(x, 0, 0), new Vector3(x, 0, depth), color);
             }
 
-            for (int x = 0; x < width; x++)
+            for (int z = 0; z <= depth; z++)
             {
-                DrawLine(new Vector3(x, 0, depth), new Vector3(x + 1, 0, depth), color);
-                DrawLine(new Vector3(width, 0, x), new Vector3(width, 0, x+1), color);
+                DrawLine(new Vector3(0, 0, z), new Vector3(width, 0, z), color);
             }
         }
 
@@ -163,19 +158,33 @@ namespace GraphicsDemos
         /// <param name="color">The color of the grid</param>
         public void DrawXYGrid(int width, int height, Color color)
         {
-            for (int x = 0; x < width; x++)
+            for (int x = 0; x <= width; x++)
             {
-                for (int y = 0; y < height; y++)
-                {
-                    DrawLine(new Vector3(x, y, 0), new Vector3(x, y + 1, 0), color);
-                    DrawLine(new Vector3(x + 1, y, 0), new Vector3(x, y, 0), color);
-                }
+                DrawLine(new Vector3(x, 0, 0), new Vector3(x, height, 0), color);
             }
 
-            for (int x = 0; x < width; x++)
+            for (int y = 0; y <= height; y++)
             {
-                DrawLine(new Vector3(x, height, 0), new Vector3(x + 1, height, 0), color);
-                DrawLine(new Vector3(width, x, 0), new Vector3(width, x + 1, 0), color);
+                DrawLine(new Vector3(0, y, 0), new Vector3(width, y, 0), color);
+            }
+        }
+
+        /// <summary>
+        /// Draws a grid with specified width and height, in the positive YZ plane
+        /// </summary>
+        /// <param name="width">The number of cells the grid should have along the X axis</param>
+        /// <param name="depth">The number of cells the grid should have along the Y axis</param>
+        /// <param name="color">The color of the grid</param>
+        public void DrawYZGrid(int height, int depth, Color color)
+        {
+            for (int y = 0; y <= height; y++)
+            {
+                DrawLine(new Vector3(0, y, 0), new Vector3(0, y, depth), color);
+            }
+
+            for (int z = 0; z <= depth; z++)
+            {
+                DrawLine(new Vector3(0, 0, z), new Vector3(0, height, z), color);
             }
         }
 
@@ -191,6 +200,12 @@ namespace GraphicsDemos
             AddVertex(new VertexPositionColor(v1, color));
             AddVertex(new VertexPositionColor(v2, color));
             AddVertex(new VertexPositionColor(v3, color));
+        }
+
+        public void FillQuad(Vector3 v1, Vector3 v2, Vector3 v3, Vector3 v4, Color color)
+        {
+            FillTriangle(v1, v2, v4, color);
+            FillTriangle(v2, v3, v4, color);
         }
 
         /// <summary>

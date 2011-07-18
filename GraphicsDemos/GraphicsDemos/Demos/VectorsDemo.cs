@@ -51,6 +51,11 @@ namespace GraphicsDemos.Demos
             primBatch.DrawTriangle(a, b, c, Color.Blue);
             primBatch.DrawLine(triangleCenter, triangleCenter + n, Color.Orange);
 
+            //Draw our coordinate axes for fun
+            primBatch.DrawLine(new Vector3(0, 1, 0), new Vector3(1, 1, 0), Color.Red);
+            primBatch.DrawLine(new Vector3(0, 1, 0), new Vector3(0, 2, 0), Color.Green);
+            primBatch.DrawLine(new Vector3(0, 1, 0), new Vector3(0, 1, 1), Color.Blue);
+
             primBatch.End();
         }
     }

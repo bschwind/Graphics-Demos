@@ -24,6 +24,9 @@ namespace GraphicsDemos
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
+            //Enable anti-aliasing
+            graphics.PreferMultiSampling = true;
+
             //Put our resolution at 720p
             graphics.PreferredBackBufferWidth = Config.ScreenWidth;
             graphics.PreferredBackBufferHeight = Config.ScreenHeight;
@@ -51,6 +54,8 @@ namespace GraphicsDemos
 
             demos = new List<Demo>();
             demos.Add(new VectorsDemo());
+            demos.Add(new TrianglesDemo());
+            currentDemo = 1;
             demos[currentDemo].LoadContent(Content, GraphicsDevice);
         }
 
