@@ -110,8 +110,9 @@
     <Compile Include="Cameras\Camera.cs" />
     <Compile Include="Cameras\FirstPersonCamera.cs" />
     <Compile Include="Config.cs" />
+    <Compile Include="Demos\TriangleDemo.cs" />
     <Compile Include="Demos\Demo.cs" />
-    <Compile Include="Demos\TrianglesDemo.cs" />
+    <Compile Include="Demos\SurfaceDemo.cs" />
     <Compile Include="Demos\VectorsDemo.cs" />
     <Compile Include="Graphics\GraphicsObject.cs" />
     <Compile Include="Graphics\PrimitiveBatch.cs" />
