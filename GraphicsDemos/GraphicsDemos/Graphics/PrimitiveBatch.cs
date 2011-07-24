@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using GraphicsDemos.Cameras;
 
-namespace GraphicsDemos
+namespace GraphicsDemos.Graphics
 {
     /// <summary>
     /// Used to draw simple shapes on the graphics card. Intended for graphics debugging.
@@ -29,8 +29,10 @@ namespace GraphicsDemos
         int vertCounter = 0;
         int vertsPerPrimitive;
         VertexPositionColor[] verts;
+        VertexPositionColorNormal[] shadedVerts;
         Camera currentCam;
         bool hasBegun = false;
+        bool smoothShading = false;
         PrimitiveType currentType;
 
         public GraphicsDevice Device
@@ -38,6 +40,36 @@ namespace GraphicsDemos
             get
             {
                 return device;
+            }
+        }
+
+        /// <summary>
+        /// Changes the renderer to use smooth shading. Do not call every frame
+        /// </summary>
+        public bool SmoothShadingEnabled
+        {
+            get
+            {
+                return smoothShading;
+            }
+            set
+            {
+                smoothShading = value;
+                if (smoothShading)
+                {
+                    verts = null;
+                    shadedVerts = new VertexPositionColorNormal[maxVertsPerDraw];
+                    effect.LightingEnabled = true;
+                    effect.EnableDefaultLighting();
+                    effect.PreferPerPixelLighting = true;
+                }
+                else
+                {
+                    shadedVerts = null;
+                    verts = new VertexPositionColor[maxVertsPerDraw];
+                    effect.LightingEnabled = false;
+                    effect.PreferPerPixelLighting = false;
+                }
             }
         }
 
@@ -99,6 +131,27 @@ namespace GraphicsDemos
             }
 
             verts[vertCounter] = vpc;
+            vertCounter++;
+        }
+
+        /// <summary>
+        /// The simplest call for PrimitiveBatch. Adds a single vertex to be rendered to the batch.
+        /// If called twice with different vertices while using a line list, a line would be rendered.
+        /// </summary>
+        /// <param name="vpc"></param>
+        public void AddVertex(VertexPositionColorNormal vpc)
+        {
+            if (!hasBegun)
+            {
+                throw new Exception("You must begin a batch before you can add vertices");
+            }
+
+            if (vertCounter >= shadedVerts.Length)
+            {
+                Flush();
+            }
+
+            shadedVerts[vertCounter] = vpc;
             vertCounter++;
         }
 
@@ -197,9 +250,11 @@ namespace GraphicsDemos
         /// <param name="color">The color of the triangle</param>
         public void FillTriangle(Vector3 v1, Vector3 v2, Vector3 v3, Color color)
         {
-            AddVertex(new VertexPositionColor(v1, color));
-            AddVertex(new VertexPositionColor(v2, color));
-            AddVertex(new VertexPositionColor(v3, color));
+            Vector3 normal = Vector3.Normalize(Vector3.Cross(v3 - v1, v2 - v1));
+
+            AddVertex(new VertexPositionColorNormal(v1, color, normal));
+            AddVertex(new VertexPositionColorNormal(v2, color, normal));
+            AddVertex(new VertexPositionColorNormal(v3, color, normal));
         }
 
         public void FillQuad(Vector3 v1, Vector3 v2, Vector3 v3, Vector3 v4, Color color)
@@ -223,7 +278,15 @@ namespace GraphicsDemos
             effect.Projection = currentCam.Projection;
 
             effect.CurrentTechnique.Passes[0].Apply();
-            device.DrawUserPrimitives<VertexPositionColor>(currentType, verts, 0, primitiveCount);
+            if (!smoothShading)
+            {
+                device.DrawUserPrimitives<VertexPositionColor>(currentType, verts, 0, primitiveCount);
+            }
+            else
+            {
+                device.DrawUserPrimitives<VertexPositionColorNormal>(currentType, shadedVerts, 0, primitiveCount);
+            }
+            
 
             vertCounter = 0;
         }

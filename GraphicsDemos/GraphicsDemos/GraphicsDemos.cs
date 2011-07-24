@@ -56,7 +56,7 @@ namespace GraphicsDemos
             demos.Add(new VectorsDemo());
             demos.Add(new TriangleDemo());
             demos.Add(new SurfaceDemo());
-            currentDemo = 1;
+            currentDemo = 2;
             demos[currentDemo].LoadContent(Content, GraphicsDevice);
         }
 

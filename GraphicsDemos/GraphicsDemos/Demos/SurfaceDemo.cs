@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using GraphicsDemos.Cameras;
+using GraphicsDemos.Graphics;
 
 namespace GraphicsDemos.Demos
 {
@@ -24,6 +25,7 @@ namespace GraphicsDemos.Demos
             cam = new FirstPersonCamera(0.5f, 5f);
             cam.Pos = new Vector3(5, 1, 10);
             primBatch = new PrimitiveBatch(g);
+            primBatch.SmoothShadingEnabled = true;
         }
 
         public override void Update(GameTime g)
@@ -34,7 +36,8 @@ namespace GraphicsDemos.Demos
 
         private float surfaceFunction(float x, float y)
         {
-            return (float)(Math.Cos(x+totalSeconds * 6) + Math.Cos(y+ totalSeconds * 6));
+            //return (float)(Math.Cos(x+totalSeconds * 6) + Math.Cos(y+ totalSeconds * 6));
+            return (float)Math.Cos(new Vector2(x, y).Length()  * (totalSeconds)) * 0.5f;
         }
 
         public override void Draw(GameTime g)
@@ -42,12 +45,12 @@ namespace GraphicsDemos.Demos
             Device.Clear(Color.Black);
 
             primBatch.Begin(PrimitiveType.TriangleList, cam);
-            fillSurface(Vector2.Zero, new Vector2(10, 10), 100, surfaceFunction);
+            fillSurface(new Vector2(-2, -2), new Vector2(2, 2), 100, surfaceFunction);
             primBatch.End();
-
-            primBatch.Begin(PrimitiveType.LineList, cam);
+     
+            /*primBatch.Begin(PrimitiveType.LineList, cam);
             primBatch.DrawXZGrid(10, 10, Color.Red);
-            primBatch.End();
+            primBatch.End();*/
         }
 
         private void fillSurface(Vector2 startBounds, Vector2 endBounds, int iterationsPerDim, SurfaceFunction func)
@@ -77,7 +80,7 @@ namespace GraphicsDemos.Demos
                     xVal = startBounds.X + (deltaX * x);
                     v4 = new Vector3(xVal, func(xVal, zVal), zVal);
 
-                    primBatch.FillQuad(v1, v2, v3, v4, Color.Green);
+                    primBatch.FillQuad(v1, v2, v3, v4, Color.Red);
                 }
             }
         }
