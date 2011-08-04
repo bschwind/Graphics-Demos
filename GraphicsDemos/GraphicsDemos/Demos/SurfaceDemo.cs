@@ -36,8 +36,7 @@ namespace GraphicsDemos.Demos
 
         private float surfaceFunction(float x, float y)
         {
-            //return (float)(Math.Cos(x+totalSeconds * 6) + Math.Cos(y+ totalSeconds * 6));
-            return (float)Math.Cos(new Vector2(x, y).Length()  * (totalSeconds)) * 0.5f;
+            return (float)(Math.Cos(x+totalSeconds) + Math.Cos(y+ totalSeconds));
         }
 
         public override void Draw(GameTime g)
@@ -45,12 +44,8 @@ namespace GraphicsDemos.Demos
             Device.Clear(Color.Black);
 
             primBatch.Begin(PrimitiveType.TriangleList, cam);
-            fillSurface(new Vector2(-2, -2), new Vector2(2, 2), 100, surfaceFunction);
+            fillSurface(new Vector2(0, 0), new Vector2(10, 10), 100, surfaceFunction);
             primBatch.End();
-     
-            /*primBatch.Begin(PrimitiveType.LineList, cam);
-            primBatch.DrawXZGrid(10, 10, Color.Red);
-            primBatch.End();*/
         }
 
         private void fillSurface(Vector2 startBounds, Vector2 endBounds, int iterationsPerDim, SurfaceFunction func)
