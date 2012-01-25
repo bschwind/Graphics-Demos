@@ -9,7 +9,7 @@ using GraphicsToolkit.Graphics;
 
 namespace GraphicsDemos.Demos
 {
-    public class VectorsDemo : Demo
+    public class Lab1Demo : Demo
     {
         private FirstPersonCamera cam;
         private PrimitiveBatch primBatch;
@@ -22,7 +22,7 @@ namespace GraphicsDemos.Demos
 
             //Set up our camera and primitive renderer
             cam = new FirstPersonCamera(0.5f, 5f);
-            cam.Pos = new Vector3(5, 1, 10);
+            cam.Pos = new Vector3(0, 2, 10);
             primBatch = new PrimitiveBatch(g);
 
 
@@ -44,18 +44,20 @@ namespace GraphicsDemos.Demos
         public override void Draw(GameTime g)
         {
             Device.Clear(Color.Black);
+
             primBatch.Begin(PrimitiveType.LineList, cam);
-            primBatch.DrawXZGrid(10, 10, Color.LightBlue);
+            primBatch.DrawXZGrid(10, 10, Color.Blue);
+            primBatch.DrawXYGrid(10, 10, Color.Red);
+            primBatch.DrawYZGrid(10, 10, Color.Green);
 
-            //Draw the triangle and its normal
-            primBatch.DrawTriangle(a, b, c, Color.Blue);
-            primBatch.DrawLine(triangleCenter, triangleCenter + n, Color.Orange);
+            primBatch.End();
 
-            //Draw our coordinate axes for fun
-            primBatch.DrawLine(new Vector3(0, 1, 0), new Vector3(1, 1, 0), Color.Red);
-            primBatch.DrawLine(new Vector3(0, 1, 0), new Vector3(0, 2, 0), Color.Green);
-            primBatch.DrawLine(new Vector3(0, 1, 0), new Vector3(0, 1, 1), Color.Blue);
-
+            //Draw a hollow cube with different colors
+            primBatch.Begin(PrimitiveType.TriangleList, cam);
+            primBatch.FillQuad(new Vector3(-1, 1, 1), new Vector3(1, 1, 1), new Vector3(1, -1, 1), new Vector3(-1, -1, 1), true, Color.Red);
+            primBatch.FillQuad(new Vector3(-1, 1, -1), new Vector3(-1, 1, 1), new Vector3(-1, -1, 1), new Vector3(-1, -1, -1), true, Color.Blue);
+            primBatch.FillQuad(new Vector3(1, 1, -1), new Vector3(-1, 1, -1), new Vector3(-1, -1, -1), new Vector3(1, -1, -1), true, Color.Green);
+            primBatch.FillQuad(new Vector3(1, 1, 1), new Vector3(1, 1, -1), new Vector3(1, -1, -1), new Vector3(1, -1, 1), true, Color.Yellow);
             primBatch.End();
         }
     }

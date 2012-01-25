@@ -9,6 +9,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using GraphicsDemos.Demos;
+using GraphicsToolkit.Input;
+using GraphicsToolkit;
 
 namespace GraphicsDemos
 {
@@ -24,12 +26,14 @@ namespace GraphicsDemos
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
+            Components.Add(new InputHandler(this));
+
             //Enable anti-aliasing
             graphics.PreferMultiSampling = true;
 
             //Put our resolution at 720p
-            graphics.PreferredBackBufferWidth = Config.ScreenWidth;
-            graphics.PreferredBackBufferHeight = Config.ScreenHeight;
+            graphics.PreferredBackBufferWidth = Config.ScreenWidth = 1280;
+            graphics.PreferredBackBufferHeight = Config.ScreenHeight = 720;
         }
 
         /// <summary>
@@ -53,10 +57,8 @@ namespace GraphicsDemos
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             demos = new List<Demo>();
-            demos.Add(new VectorsDemo());
-            demos.Add(new TriangleDemo());
-            demos.Add(new SurfaceDemo());
-            currentDemo = 2;
+            demos.Add(new RobotDemo());
+            currentDemo = 0;
             demos[currentDemo].LoadContent(Content, GraphicsDevice);
         }
 

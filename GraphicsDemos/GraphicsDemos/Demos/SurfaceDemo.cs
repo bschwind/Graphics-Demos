@@ -5,8 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using GraphicsDemos.Cameras;
-using GraphicsDemos.Graphics;
+using GraphicsToolkit.Graphics;
 
 namespace GraphicsDemos.Demos
 {
@@ -25,7 +24,6 @@ namespace GraphicsDemos.Demos
             cam = new FirstPersonCamera(0.5f, 5f);
             cam.Pos = new Vector3(5, 1, 10);
             primBatch = new PrimitiveBatch(g);
-            primBatch.SmoothShadingEnabled = true;
         }
 
         public override void Update(GameTime g)
