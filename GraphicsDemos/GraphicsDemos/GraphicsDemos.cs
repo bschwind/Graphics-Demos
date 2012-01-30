@@ -57,7 +57,7 @@ namespace GraphicsDemos
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             demos = new List<Demo>();
-            demos.Add(new RobotDemo());
+            demos.Add(new BallDemo());
             currentDemo = 0;
             demos[currentDemo].LoadContent(Content, GraphicsDevice);
         }
