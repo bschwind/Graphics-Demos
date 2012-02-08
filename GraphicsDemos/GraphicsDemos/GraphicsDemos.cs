@@ -32,8 +32,8 @@ namespace GraphicsDemos
             graphics.PreferMultiSampling = true;
 
             //Put our resolution at 720p
-            graphics.PreferredBackBufferWidth = Config.ScreenWidth = 1280;
-            graphics.PreferredBackBufferHeight = Config.ScreenHeight = 720;
+            graphics.PreferredBackBufferWidth = Config.ScreenWidth = 800;
+            graphics.PreferredBackBufferHeight = Config.ScreenHeight = 600;
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace GraphicsDemos
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             demos = new List<Demo>();
-            demos.Add(new BallDemo());
+            demos.Add(new RobotDemo());
             currentDemo = 0;
             demos[currentDemo].LoadContent(Content, GraphicsDevice);
         }
