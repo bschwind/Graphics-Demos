@@ -111,7 +111,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Demos\Ball.cs" />
     <Compile Include="Demos\BallDemo.cs" />
+    <Compile Include="Demos\CollisionDemo.cs" />
     <Compile Include="Demos\RobotDemo.cs" />
     <Compile Include="Demos\Lab1Demo.cs" />
     <Compile Include="Demos\PrimitivesDemo.cs" />
