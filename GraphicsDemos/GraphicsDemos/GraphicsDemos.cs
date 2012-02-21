@@ -57,7 +57,7 @@ namespace GraphicsDemos
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             demos = new List<Demo>();
-            demos.Add(new CollisionDemo());
+            demos.Add(new PickingDemo());
             currentDemo = 0;
             demos[currentDemo].LoadContent(Content, GraphicsDevice);
         }
