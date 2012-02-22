@@ -47,8 +47,8 @@ namespace GraphicsDemos.Demos
 
             body.AddChild(handle);
             body.AddChild(trigger);
+            body.SetPos(new Vector3(0, 5, 0));
         }
-
         public override void Update(GameTime g)
         {
             cam.Update(g);
@@ -69,7 +69,6 @@ namespace GraphicsDemos.Demos
             primBatch.End();
 
             body.Draw(g, Matrix.Identity, primBatch, cam);
-            trigger.Draw(g, Matrix.Identity, primBatch, cam);
         }
     }
 }
