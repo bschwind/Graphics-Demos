@@ -13,7 +13,7 @@
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <XnaFrameworkVersion>v4.0</XnaFrameworkVersion>
     <XnaPlatform>Windows</XnaPlatform>
-    <XnaProfile>Reach</XnaProfile>
+    <XnaProfile>HiDef</XnaProfile>
     <XnaCrossPlatformGroupID>a0e9b7f4-32ea-43d1-8ff6-316fe4cf3784</XnaCrossPlatformGroupID>
     <XnaOutputType>Game</XnaOutputType>
     <ApplicationIcon>Game.ico</ApplicationIcon>
@@ -114,6 +114,7 @@
     <Compile Include="Demos\Ball.cs" />
     <Compile Include="Demos\BallDemo.cs" />
     <Compile Include="Demos\CollisionDemo.cs" />
+    <Compile Include="Demos\DeferredDemo.cs" />
     <Compile Include="Demos\PickingDemo.cs" />
     <Compile Include="Demos\RobotDemo.cs" />
     <Compile Include="Demos\Lab1Demo.cs" />
