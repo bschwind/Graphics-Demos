@@ -82,6 +82,13 @@ struct GenerateBufferVOutput
 	float2 TexCoord : TEXCOORD0;
 };
 
+struct GenerateBufferPOutput
+{
+	float4 Color    : COLOR0;
+	float4 Normal   : COLOR1;
+	float4 Depth    : COLOR2;
+};
+
 //RENDER GBUFFER FUNCTIONS
 
 GenerateBufferVOutput GenerateBufferV(GenerateBufferVInput input)
@@ -98,10 +105,16 @@ GenerateBufferVOutput GenerateBufferV(GenerateBufferVInput input)
     return output;
 }
 
-float4 GenerateBufferP(GenerateBufferVOutput input) : COLOR0
+GenerateBufferPOutput GenerateBufferP(GenerateBufferVOutput input)
 {
+	GenerateBufferPOutput output;
 	float4 color = tex2D(ColorSampler, input.TexCoord);
-    return float4(color.rgb, 1);
+
+    output.Color = float4(color.rgb, 1);
+	output.Normal = float4(1,0,0,1);
+	output.Depth = float4(0,1,0,1);
+	
+	return output;
 }
 
 /////TECHNIQUES
