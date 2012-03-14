@@ -14,6 +14,7 @@ namespace GraphicsDemos.Demos
     {
         private PrimitiveBatch primBatch;
         private FirstPersonCamera cam;
+        
         DeferredRenderer renderer;
         List<Mesh> meshes = new List<Mesh>();
 
@@ -35,7 +36,7 @@ namespace GraphicsDemos.Demos
             box.Texture = content.Load<Texture2D>("Cube");
             floor.Texture = content.Load<Texture2D>("fuck");
             meshes.Add(box);
-            meshes.Add(floor);
+            //meshes.Add(floor);
         }
         public override void Update(GameTime g)
         {
