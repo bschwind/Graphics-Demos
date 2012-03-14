@@ -48,13 +48,13 @@ namespace GraphicsDemos.Demos
         {
             Device.Clear(Color.Black);
 
-            primBatch.Begin(PrimitiveType.LineList, cam);
+            /*primBatch.Begin(PrimitiveType.LineList, cam);
 
             primBatch.DrawXZGrid(10, 10, Color.Blue);
             primBatch.DrawXYGrid(10, 10, Color.Red);
             primBatch.DrawYZGrid(10, 10, Color.Green);
 
-            primBatch.End();
+            primBatch.End();*/
 
             renderer.Render(meshes, cam);
         }

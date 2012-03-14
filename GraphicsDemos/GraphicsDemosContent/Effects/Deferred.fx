@@ -1,7 +1,4 @@
-////GLOBAL VARS
-float HalfPixelWidth;
-float HalfPixelHeight;
-
+#include "GlobalDeferred.fxh"
 
 ////RENDER QUAD VARS
 texture QuadTex;
@@ -49,6 +46,50 @@ float4 RenderQuadP(RenderQuadVOutput input) : COLOR0
 
 
 
+/////CLEAR GBUFFER STRUCTS
+
+struct ClearBufferVInput
+{
+    float4 Position : POSITION0;
+};
+
+struct ClearBufferVOutput
+{
+    float4 Position : POSITION0;
+};
+
+struct ClearBufferPOutput
+{
+	float4 Color    : COLOR0;
+	float4 Normal   : COLOR1;
+	float4 Depth    : COLOR2;
+};
+
+//CLEAR GBUFFER FUNCTIONS
+
+ClearBufferVOutput ClearBufferV(ClearBufferVInput input)
+{
+	ClearBufferVOutput output;
+    output.Position = input.Position;
+	return output;
+}
+
+ClearBufferPOutput ClearBufferP(ClearBufferVOutput input)
+{
+	ClearBufferPOutput output;
+	
+	output.Color = 0.0f;
+	output.Color.a = 0.0f;
+	output.Normal.rgb = 0.0f;
+	output.Normal.a = 0.0f;
+	output.Depth = 1.0f;
+
+	return output;
+}
+
+
+
+
 /////RENDER G BUFFER VARS
 float4x4 World;
 float4x4 View;
@@ -66,7 +107,7 @@ sampler_state
 	AddressV = Clamp;
 };
 
-/////RENDER GBUFfER STRUCTS
+/////RENDER GBUFFER STRUCTS
 
 struct GenerateBufferVInput
 {
@@ -78,8 +119,9 @@ struct GenerateBufferVInput
 struct GenerateBufferVOutput
 {
     float4 Position : POSITION0;
-	float3 Normal   : TEXCOORD1;
 	float2 TexCoord : TEXCOORD0;
+	float3 Normal   : TEXCOORD1;
+	float2 Depth    : TEXCOORD2;
 };
 
 struct GenerateBufferPOutput
@@ -101,6 +143,8 @@ GenerateBufferVOutput GenerateBufferV(GenerateBufferVInput input)
 
 	output.TexCoord = input.TexCoord;
 	output.Normal = input.Normal;
+	output.Depth.x = output.Position.z;
+	output.Depth.y = output.Position.w;
 
     return output;
 }
@@ -111,8 +155,9 @@ GenerateBufferPOutput GenerateBufferP(GenerateBufferVOutput input)
 	float4 color = tex2D(ColorSampler, input.TexCoord);
 
     output.Color = float4(color.rgb, 1);
-	output.Normal = float4(1,0,0,1);
-	output.Depth = float4(0,1,0,1);
+	output.Normal = float4(input.Normal,1);
+	float depth = input.Depth.x / input.Depth.y;
+	output.Depth = float4(depth,depth,depth,1);
 	
 	return output;
 }
@@ -134,5 +179,14 @@ technique RenderQuad
 	{
 		VertexShader = compile vs_2_0 RenderQuadV();
 		PixelShader = compile ps_2_0 RenderQuadP();
+	}
+}
+
+technique ClearBuffer
+{
+	pass Pass1
+	{
+		VertexShader = compile vs_2_0 ClearBufferV();
+		PixelShader = compile ps_2_0 ClearBufferP();
 	}
 }
