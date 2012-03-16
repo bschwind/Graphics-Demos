@@ -60,9 +60,8 @@
     <XnaCompressContent>true</XnaCompressContent>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GraphicsToolkit, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\GraphicsToolkit\GraphicsToolkit\bin\x86\Debug\GraphicsToolkit.dll</HintPath>
+    <Reference Include="GraphicsToolkit">
+      <HintPath>..\..\..\Graphics-Toolkit\GraphicsToolkit\bin\x86\Debug\GraphicsToolkit.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
       <Private>False</Private>
@@ -115,6 +114,7 @@
     <Compile Include="Demos\BallDemo.cs" />
     <Compile Include="Demos\CollisionDemo.cs" />
     <Compile Include="Demos\DeferredDemo.cs" />
+    <Compile Include="Demos\MotionCaptureDemo.cs" />
     <Compile Include="Demos\PickingDemo.cs" />
     <Compile Include="Demos\RobotDemo.cs" />
     <Compile Include="Demos\Lab1Demo.cs" />
