@@ -28,7 +28,7 @@ namespace GraphicsDemos.Demos
             cam.Pos = new Vector3(5, 1, 10);
             primBatch = new PrimitiveBatch(g);
 
-            animation = Animation.Parse("Content/MotionCaptures/TestMotion.tsv");
+            animation = Animation.Parse("Content/MotionCaptures/BriskWalk1.tsv");
 
             spheres = new List<MeshNode>();
             MeshBuilder mb = new MeshBuilder(Device);
