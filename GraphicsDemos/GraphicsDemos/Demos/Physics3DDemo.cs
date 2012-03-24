@@ -34,14 +34,14 @@ namespace GraphicsDemos.Demos
             cam.Pos = new Vector3(3, 3, 13);
 
             MeshBuilder mb = new MeshBuilder(g);
-            sphere = mb.CreateSphere(1f, 3, 3);
+            sphere = mb.CreateSphere(1f, 10, 10);
 
             setupEngine();
         }
 
         private void setupEngine()
         {
-            engine = new PhysicsEngine3D();
+            engine = new PhysicsEngine3D(new GridPartition3D(Vector3.Zero, new Vector3(10, 10, 10), 3, 3, 3));
 
             float boxSize = 10;
 
