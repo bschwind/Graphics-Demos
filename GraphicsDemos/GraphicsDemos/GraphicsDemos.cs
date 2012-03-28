@@ -57,7 +57,7 @@ namespace GraphicsDemos
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             demos = new List<Demo>();
-            demos.Add(new DeferredDemo());
+            demos.Add(new Physics3DDemo());
             currentDemo = 0;
             demos[currentDemo].LoadContent(Content, GraphicsDevice);
         }

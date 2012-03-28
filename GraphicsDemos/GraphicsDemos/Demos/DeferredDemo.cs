@@ -14,6 +14,7 @@ namespace GraphicsDemos.Demos
     {
         private PrimitiveBatch primBatch;
         private FirstPersonCamera cam;
+        
         DeferredRenderer renderer;
         List<Mesh> meshes = new List<Mesh>();
 
@@ -33,7 +34,7 @@ namespace GraphicsDemos.Demos
             mb.AddQuad(new Vector3(-100, 0, -100), new Vector3(100, 0, -100), new Vector3(100, 0, 100), new Vector3(-100, 0, 100), false, Vector2.Zero, Vector2.One);
             Mesh floor = mb.End();
             box.Texture = content.Load<Texture2D>("Cube");
-            floor.Texture = content.Load<Texture2D>("fuck");
+            floor.Texture = content.Load<Texture2D>("Cube");
             meshes.Add(box);
             meshes.Add(floor);
         }

@@ -131,7 +131,7 @@ struct GenerateBufferPOutput
 	float4 Depth    : COLOR2;
 };
 
-//RENDER GBUFFER FUNCTIONS
+/////RENDER GBUFFER FUNCTIONS
 
 GenerateBufferVOutput GenerateBufferV(GenerateBufferVInput input)
 {
@@ -162,6 +162,52 @@ GenerateBufferPOutput GenerateBufferP(GenerateBufferVOutput input)
 	return output;
 }
 
+
+
+
+
+
+
+
+
+/////COMPOSITE VARS
+sampler ColorBuffer : register(s0);
+sampler LightBuffer : register(s1);
+
+/////COMPOSITE STRUCTS
+
+struct CompositeVInput
+{
+    float3 Position : POSITION0;
+	float2 TexCoord : TEXCOORD0;
+};
+
+struct CompositeVOutput
+{
+    float4 Position : POSITION0;
+	float2 TexCoord : TEXCOORD0;
+};
+
+/////COMPOSITE FUNCTIONS
+
+CompositeVOutput CompositeV(CompositeVInput input)
+{
+    CompositeVOutput output;
+
+    output.Position = float4(input.Position, 1);
+	output.TexCoord = input.TexCoord;
+
+    return output;
+}
+
+float4 CompositeP(CompositeVOutput input) : COLOR0
+{
+	float3 color = tex2D(ColorBuffer, input.TexCoord).xyz;
+	float4 lighting = tex2D(LightBuffer, input.TexCoord);
+	float4 output = float4(color.xyz * lighting.xyz + lighting.w, 1);
+	return output;
+}
+
 /////TECHNIQUES
 
 technique GenerateBuffer
@@ -188,5 +234,14 @@ technique ClearBuffer
 	{
 		VertexShader = compile vs_2_0 ClearBufferV();
 		PixelShader = compile ps_2_0 ClearBufferP();
+	}
+}
+
+technique Composite
+{
+	pass Pass1
+	{
+		VertexShader = compile vs_2_0 CompositeV();
+		PixelShader = compile ps_2_0 CompositeP();
 	}
 }
