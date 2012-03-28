@@ -28,14 +28,14 @@ namespace GraphicsDemos.Demos
             cam.Pos = new Vector3(5, 1, 10);
             primBatch = new PrimitiveBatch(g);
 
-            animation = Animation.Parse("Content/MotionCaptures/BriskWalk1.tsv");
+            animation = Animation.Parse("Content/MotionCaptures/BriskWalk1_All.tsv");
 
             spheres = new List<MeshNode>();
             MeshBuilder mb = new MeshBuilder(Device);
 
             for (int i = 0; i < animation.GetNumMarkers(); i++)
             {
-                spheres.Add(new MeshNode(mb.CreateSphere(0.1f, 10, 10)));
+                spheres.Add(new MeshNode(mb.CreateSphere(0.06f, 10, 10)));
             }
         }
 
