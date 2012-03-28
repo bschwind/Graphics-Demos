@@ -31,8 +31,8 @@ namespace GraphicsDemos.Demos
             Mesh triangle;// = mb.CreateSphere(0.3f, 15, 15);
             mb.Begin();
      //       mb.AddTriangle(Vector3.Zero, new Vector3(1, 1, 0), new Vector3(1, 0, 0), true);
-            mb.AddTriangle(Vector3.Zero, new Vector3(1, 1, 0), new Vector3(1, 0, 0), new Vector2(0, 0), new Vector2(1, 1), new Vector2(1, 0), false);
-
+     //       mb.AddTriangle(Vector3.Zero, new Vector3(1, 1, 0), new Vector3(1, 0, 0), new Vector2(1, 1), new Vector2(0, 0), new Vector2(0, 1), true);
+            mb.AddQuad(Vector3.Zero, new Vector3(1, 1, 0), new Vector3(2, 1, 0), new Vector3(1, 0, 0), true, new Vector2(0, 0), new Vector2(1, 1), new Vector2(2, 1), new Vector2(1, 0));
             triangle = mb.End();
 
             triangle.Texture = content.Load<Texture2D>("Cube");
