@@ -43,7 +43,7 @@ namespace GraphicsDemos.Demos
         {
             cam.Update(g);
 
-            currentFrame+=5;
+            currentFrame+=4;
             if (currentFrame >= animation.GetFrames().Length)
             {
                 currentFrame = 0;
